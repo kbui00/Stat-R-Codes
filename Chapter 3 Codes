@@ -1,0 +1,69 @@
+#Maclaurin series: exp(a) = Sigma(0,inf) {a^x/factorial(x)} (for Poisson)
+#(a+b)^n = Sigma(0,inf) {(choose(n,x))*a^(n-x)*b^x}		(for Binomial)
+
+
+#Discrete:
+#Binomial (Bernoulli with n trials, used when there're only 2 outcomes)
+
+dbinom(x, size = a, prob = p)		   #Gives P(X = x)
+pbinom(x, size = a, prob = p)		   #Gives P(X =< x)
+pbinom(x-1, size =a, prob =p, lower = FALSE) #Gives P(X >= x)
+
+#Poisson (find prob. when average is known)
+
+dpois(x, lambda = a)			   #Gives P(X = x)
+ppois(x, lambda = a)			   #Gives P(X =< x)
+ppois(x-1, lambda = a, lower = FALSE)  #Gives P(X >= x)
+ppois(x-1, lambda = a) - ppois(y, lambda = a)   #Gives P(y < X < x)
+
+
+#Continuous:
+#Uniform (use when prob. of all outcomes are the same)
+#P(m < x < n)
+f = function (x) {1/b-a}
+integrate (Vectorize(f), lower = m, upper = n)
+
+#Normal
+
+pnorm(x, mean=0, sd=1)			   #Gives P(X =< x)
+pnorm(n, mean=0, sd=1) - pnorm(m, mean=0, sd=1)		   #Gives P(m < x <n)
+pnorm(x, mean=0, sd=1, lower=FALSE)    #Gives P(X >= x)
+
+qnorm(p, mean=0, sd=1)			   #Gives Zo if Z < Zo #Quantiles
+qnorm(p, mean=0, sd=1, lower=FALSE)	   #Gives Zo if Z > Zo #Quantiles
+
+#Gamma (use when waiting time between Poisson events are relevant)
+#Alpha = shape, beta = scale
+
+pgamma(x, shape=alpha, scale=beta)	   		   #Gives P(X < x)
+pgamma(x, shape=alpha, scale=beta, lower=FALSE)	   #Gives P(X > x)
+
+#Exponential (use when waiting time Poisson events are relevant with rate of change)
+
+pexp(x, rate=1/mean)			   #Gives P(X < x)
+
+#Chi squared (use to compare observed data to the data we would expect)
+
+qchisq(percentile, df=n-1)			#Gives percentile with degree of freedom
+
+#Sample mean
+n = 16
+average = 60
+sigma = 4
+lower = 52
+upper = 58
+meansd = (sigma/sqrt(n))
+pnorm (upper, mean=average, sd = meansd) - pnorm(lower,mean =average, sd=meansd)
+
+#Normal approximation:
+x = 390
+n = 500
+p = 0.8
+lower = 374.5
+upper = 425.5
+meanaprox = n*p
+sdaprox = sqrt(n*p*(1-p))
+dnorm(x, mean = meanaprox, sd = sdaprox)
+dbinom(x, size = n, prob = p)
+pnorm(upper, mean = meanaprox, sd = sdaprox) - pnorm(lower, mean = meanaprox, sd = sdaprox)
+pbinom(425, size = n, prob = p) - pbinom(375, size = n, prob = p)
