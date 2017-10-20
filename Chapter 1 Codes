@@ -1,0 +1,30 @@
+#Can use = to replace <-
+#Asssign values to a vector v
+
+v = c(1,2,3)
+
+#Assign function f(x)
+
+f = function (x) {x+4}
+
+#Integration
+#Must assign function first!!
+
+integrate(f, lower = 0, upper = 5)
+
+#Combination & Permutation:
+
+factorial (x) / factorial (x-r)		#Permutation
+choose (x,r)					#Combination
+
+#Histogram (use on vectors)
+
+hist(v, main = "Title")
+
+#Barplot
+names.arg = ("a","b","c") 			#Name column assign
+barplot(v, xlab = "Horizontal label", ylab = "Vertical label")
+
+
+#1+2+3+...+n = n(n+1)/2
+#1^2+2^2+...+n^2 = n(n+1)(2n+1)/6
